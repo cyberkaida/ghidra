@@ -1,0 +1,18 @@
+<decompilertest>
+<binaryimage arch="AARCH64:LE:64:AppleSilicon:swift">
+<bytechunk space="ram" offset="0x100000" readonly="true">
+0004803d151c00f908a98cd2888dadf2
+e80dc0f209a0fcd2082402a901048052
+0220fcd2430180520420fcd2
+</bytechunk>
+<symbol space="ram" offset="0x100000" name="loadFromWideRegister"/>
+</binaryimage>
+<script>
+  <com>option readonly on</com>
+  <com>lo fu loadFromWideRegister</com>
+  <com>decompile</com>
+  <com>print C</com>
+  <com>quit</com>
+</script>
+<stringmatch name="Swift string #1" min="1" max="1">builtin_strncpy</stringmatch>
+</decompilertest>
