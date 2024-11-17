@@ -4,9 +4,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -90,11 +90,12 @@ public:
   int4 getTestsSucceeded(void) const { return numTestsSucceeded; }	///< Get the number of tests that passed
   int4 numCommands(void) const { return commands.size(); }	///< Get the number of commands in the current script
   string getCommand(int4 i) const { return commands[i]; }	///< Get the i-th command
+  bool verbose; //< Set to \b true if \b output for the decompiler is wanted.
   void loadTest(const string &filename);	///< Load a test program, tests, and script
   void restoreXml(DocumentStorage &store,const Element *el);	///< Load tests from a \<decompilertest> tag.
   void restoreXmlOldForm(DocumentStorage &store,const Element *el);	///< Load tests from \<binaryimage> tag.
   void runTests(list<string> &lateStream);	///< Run the script and perform the tests
-  static int runTestFiles(const vector<string> &testFiles,ostream &s);	///< Run tests for each listed file
+  static int runTestFiles(const vector<string> &testFiles,ostream &s, bool verbose);	///< Run tests for each listed file
 };
 
 } // End namespace ghidra

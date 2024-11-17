@@ -204,6 +204,7 @@ FunctionTestCollection::FunctionTestCollection(ostream &s)
   console->setErrorIsDone(true);
   numTestsApplied = 0;
   numTestsSucceeded = 0;
+  verbose = false;
 }
 
 FunctionTestCollection::FunctionTestCollection(IfaceStatus *con)
@@ -214,6 +215,7 @@ FunctionTestCollection::FunctionTestCollection(IfaceStatus *con)
   dcp = (IfaceDecompData *)console->getData("decompile");
   numTestsApplied = 0;
   numTestsSucceeded = 0;
+  verbose = false;
 }
 
 FunctionTestCollection::~FunctionTestCollection(void)
@@ -321,6 +323,11 @@ void FunctionTestCollection::runTests(list<string> &lateStream)
   string::size_type pos = result.find_first_of('\n');
   while(pos != string::npos) {
     string line = result.substr(prevpos,pos - prevpos);
+
+    if (this->verbose) {
+      fprintf(stderr, "%s\n", line.c_str());
+    }
+
     passLineToTests(line);
     prevpos = pos + 1;
     pos = result.find_first_of('\n',prevpos);
@@ -335,13 +342,14 @@ void FunctionTestCollection::runTests(list<string> &lateStream)
 /// Run through all XML files in the given list, processing each in turn.
 /// \param testFiles is the given list of test files
 /// \param s is the output stream to print results to
-int FunctionTestCollection::runTestFiles(const vector<string> &testFiles,ostream &s)
+int FunctionTestCollection::runTestFiles(const vector<string> &testFiles,ostream &s, bool verbose=false)
 
 {
   int4 totalTestsApplied = 0;
   int4 totalTestsSucceeded = 0;
   list<string> failures;
   FunctionTestCollection testCollection(s);
+  testCollection.verbose = verbose;
   for(int4 i=0;i<testFiles.size();++i) {
     try {
       testCollection.clear();
