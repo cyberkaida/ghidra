@@ -91,11 +91,12 @@ public:
   int4 getTestsSucceeded(void) const { return numTestsSucceeded; }	///< Get the number of tests that passed
   int4 numCommands(void) const { return commands.size(); }	///< Get the number of commands in the current script
   string getCommand(int4 i) const { return commands[i]; }	///< Get the i-th command
+  bool verbose; //< Set to \b true if \b output for the decompiler is wanted.
   void loadTest(const string &filename);	///< Load a test program, tests, and script
   void restoreXml(DocumentStorage &store,const Element *el);	///< Load tests from a \<decompilertest> tag.
   void restoreXmlOldForm(DocumentStorage &store,const Element *el);	///< Load tests from \<binaryimage> tag.
   void runTests(list<string> &lateStream);	///< Run the script and perform the tests
-  static int runTestFiles(const vector<string> &testFiles,ostream &s);	///< Run tests for each listed file
+  static int runTestFiles(const vector<string> &testFiles,ostream &s, bool verbose);	///< Run tests for each listed file
 };
 
 } // End namespace ghidra
